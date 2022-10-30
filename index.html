@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario</title>
+    <link rel="stylesheet" href="./assecs/css/script.css">
+
+</head>
+
+<body>
+
+    <div class="game-board">
+        
+        <img src="  ./assecs/img/clouds.png  " alt="" class="clouds">
+        <img src="./assecs/img/mario.gif" alt="" class="mario">
+        <img src="./assecs/img/pipe.png" alt="" class="pipe">
+    </div>
+    <div class="pont" ><h1 id="pont"></h1></div.pont>
+    <input type="button" value="Começar o Jogo " Page" onClick="window.location.reload()" class="botao">
+    
+
+
+<script>
+    const mario = document.querySelectorAll('.mario')[0];
+    const pipe = document.querySelectorAll('.pipe')[0];
+    let ponts = document.querySelector('#pont') ;
+    let pont = 0 ;
+    let novpont = 0;
+
+    let audio = new Audio('./assecs/audio/mario.mp3');
+    audio.addEventListener('canplaythrough', function () {
+    });
+
+    let audiodie = new Audio('./assecs/audio/mariodie.mp3');
+    audiodie.addEventListener('canplaythrough', function () {
+    });
+
+    let audiojump = new Audio('./assecs/audio/mariojump.mp3');
+    audiojump.addEventListener('canplaythrough', function () {
+    });
+
+    function escreve(){
+            novpont = novpont + pont ;
+            ponts.textContent =  novpont;
+            pont = 0;
+
+    }
+    
+       const jump = () => {
+        mario.classList.add('jump');
+        setTimeout(() => {
+            mario.classList.remove('jump');
+            }, 500);
+            audiojump.play(); 
+            
+    }
+    const loop = setInterval(() => {
+        console.log('loop')
+        const pipePosition = pipe.offsetLeft;
+        const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+        
+        if (pipePosition <= 0){
+            pont = 1;
+            escreve();
+
+        }
+
+        if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
+            pipe.style.animation = 'none';
+            pipe.style.left = `${pipePosition}px`;
+            mario.style.animation = 'none';
+            mario.style.left = `${marioPosition}px`;
+            mario.src = "./assecs/img/game-over.png";
+            mario.style.width = '75px';
+            mario.style.marginLeft = '35px'
+            audio.pause();
+            audiodie.play();
+            clear.Interval('loop')
+            
+                       
+        }
+              
+      
+    }, 140);
+    
+    audio.play();
+    document.addEventListener('keydown', jump);
+    document.addEventListener('click', jump);
+    
+                     
+
+    
+
+</script>
+</body>
+</html>
