@@ -1,4 +1,6 @@
-# jogomario
+# "Jogo mario ver 3"
+'Jogo simples feito para navegador utilizado HTML CSS e Javascript ' 
+'Atualizado botão reiniciar e contador de pulos'
 
 HTML CSS e JAVASCRIPT
 
